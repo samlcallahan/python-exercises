@@ -94,3 +94,37 @@ True or "42"
 
 # Prediction: TypeError
 {} + {}
+
+daily_rate = 3
+
+days_rented = [3, 5, 1]
+
+total_cost = sum(days_rented) * daily_rate
+
+google_rate = 400
+
+amazon_rate = 380
+
+facebook_rate = 350
+
+facebook_time = 10
+
+google_time = 6
+
+amazon_time = 4
+
+total_pay = facebook_rate * facebook_time + google_rate * google_time +amazon_rate * amazon_time
+
+if university_class.full = False and not university_class.schedule.isdisjoint(student.schedule):
+    university_class.enroll(student)
+
+if (purchase_size > 2 or member.premium == True) and not offer.expiration:
+    offer.apply()
+
+username = 'codeup'
+password = 'notastrongpassword'
+
+password_length_at_least_five = len(password) >= 5
+username_length_no_more_than_twenty = len(username) <= 20
+password_is_not_username = password != username
+no_starting_or_ending_whitespace = username.strip() == username and password.strip() == password

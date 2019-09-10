@@ -77,7 +77,7 @@ even_numbers = [number for number in numbers if number % 2 == 0]
 
 # BONUS Make a variable named "primes" that is a list containing the prime numbers in the numbers
 def is_prime(number):
-    number = int(number ** 2 / number)
+    number = abs(number)
     possible_factors = range(1,number // 2)
     prime = True
     for factor in possible_factors:

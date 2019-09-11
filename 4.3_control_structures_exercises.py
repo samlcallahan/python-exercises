@@ -1,0 +1,1 @@
+input("Day of the week?")

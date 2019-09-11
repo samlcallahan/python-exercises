@@ -84,7 +84,6 @@ numbers_plus_five = [number + 5 for number in numbers]
 
 # BONUS Make a variable named "primes" that is a list containing the prime numbers in the numbers
 def is_prime(number):
-    number = abs(number)
     possible_factors = range(1,number // 2)
     prime = True
     for factor in possible_factors:

@@ -62,18 +62,25 @@ fruits_with_letter_a = [fruit for fruit in fruits if "a" in fruit]
 even_numbers = [number for number in numbers if number % 2 == 0]
 
 # Exercise 11 - Make a variable named odd_numbers that holds only the odd numbers
+odd_numbers = [number for number in numbers if number % 2 == 1]
 
 # Exercise 12 - Make a variable named positive_numbers that holds only the positive numbers
+positive_numbers = [number for number in numbers if number > 0]
 
 # Exercise 13 - Make a variable named negative_numbers that holds only the negative numbers
+negative_numbers = [number for number in numbers if number < 0]
 
 # Exercise 14 - use a list comprehension w/ a conditional in order to produce a list of numbers with 2 or more numerals
+two_or_more_numerals = [number for number in numbers if abs(number) >= 10]
 
 # Exercise 15 - Make a variable named numbers_squared that contains the numbers list with each element squared. Output is [4, 9, 16, etc...]
+numbers_squared = [number ** 2 for number in numbers]
 
 # Exercise 16 - Make a variable named odd_negative_numbers that contains only the numbers that are both odd and negative.
+odd_negative_numbers = [number for number in numbers if number % 2 != 0 and number < 0]
 
 # Exercise 17 - Make a variable named numbers_plus_5. In it, return a list containing each number plus five. 
+numbers_plus_five = [number + 5 for number in numbers]
 
 # BONUS Make a variable named "primes" that is a list containing the prime numbers in the numbers
 def is_prime(number):
@@ -86,4 +93,3 @@ def is_prime(number):
     return prime
 
 primes = [number for number in numbers if is_prime(number)]
-primes

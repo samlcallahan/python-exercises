@@ -145,4 +145,17 @@ while continue_grades:
     print(letter_grade)
     continue_grades = input("Continue?(Y/N)").upper() == "Y"
 
-favorite_books = [{"title" : "Anna Karenina"}]
+favorite_books = [{"title": "Anna Karenina", "author": "Leo Tolstoy", "genre": "realist"},
+{"title": "Infinite Jest", "author": "David Foster Wallace", "genre": "postmodernist"},
+{"title": "Brideshead Revisited", "author": "Evelyn Waugh", "genre": "minimalist"},
+{"title": "A Confederacy of Dunces", "author": "John Kennedy Toole", "genre": "picaresque"}]
+
+for book in favorite_books:
+    print("Title: %s" % book["title"])
+    print("Author: %s" % book["author"])
+    print("Genre: %s" % book["genre"])
+
+genre = input("Genre?")
+for book in favorite_books:
+    if book["genre"] == genre:
+        print(book["title"])

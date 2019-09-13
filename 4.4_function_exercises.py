@@ -70,7 +70,7 @@ def remove_vowels(word):
             word = word.replace(letter,"")
     return word
 
-def normalize_name(raw_name):
+def normalize_name(name):
     """
         Takes a string and returns a 'cleaned' version of it. This means:
             - no leading or trailing whitespaces
@@ -78,10 +78,9 @@ def normalize_name(raw_name):
             - all lowercase
             - only valid python identifiers
     """
-    name = raw_name
     for letter in name:
-        if not letter.isidentifier():
-            name = name.replace(letter," ")
+        if not letter.isidentifier() and letter != " ":
+            name = name.replace(letter,"")
     name = name.strip()
     name = name.lower()
     name = name.replace(" ","_")

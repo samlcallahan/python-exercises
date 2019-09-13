@@ -12,10 +12,7 @@ def is_vowel(letter):
         Returns True if input is a vowel, otherwise returns False
     """
     vowels = "aeiou"
-    if letter.lower() in vowels:
-        return True
-    else:
-        return False
+    return letter.lower() in vowels
 
 def is_consonant(letter):
     """

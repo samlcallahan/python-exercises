@@ -79,12 +79,12 @@ def normalize_name(raw_name):
             - only valid python identifiers
     """
     name = raw_name
-    name = name.strip()
-    name = name.lower()
-    name = name.replace(" ","_")
     for letter in raw_name:
         if not letter.isidentifier():
             name = name.replace(letter,"")
+    name = name.strip()
+    name = name.lower()
+    name = name.replace(" ","_")
     return name
 
 def cumsum(list_numbers):

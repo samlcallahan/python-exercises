@@ -79,9 +79,9 @@ def normalize_name(raw_name):
             - only valid python identifiers
     """
     name = raw_name
-    for letter in raw_name:
+    for letter in name:
         if not letter.isidentifier():
-            name = name.replace(letter,"")
+            name = name.replace(letter," ")
     name = name.strip()
     name = name.lower()
     name = name.replace(" ","_")
@@ -96,7 +96,7 @@ def cumsum(list_numbers):
     cumulative_sum = []
     sum_so_far = 0
     for number in list_numbers:
-        sum += number
+        sum_so_far += number
         cumulative_sum.append(sum_so_far)
     return cumulative_sum
 

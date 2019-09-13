@@ -108,8 +108,12 @@ def twelveto24(time):
         Takes a time in a 12hr format "hh:mm[am/pm]" and returns it in a 24 hr format "hh:mm"
     """
     if time[-2:] == "am":
+        if time[:2] == "12":
+            return "0" + time[2:-2]
         return time[:-2]
     elif time[-2:] == "pm":
+        if time[:2] == "12":
+            return time[:-2]
         colon_location = time.find(":")
         hour = int(time[0:colon_location]) + 12
         return str(hour) + time[colon_location:-2]

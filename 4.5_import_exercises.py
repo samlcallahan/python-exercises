@@ -67,4 +67,12 @@ most_common_fruit = max(fruit_counts,key=fruit_counts.get)
 
 least_common_fruit = min(fruit_counts,key=fruit_counts.get)
 
-total_unreads = sum([int(x["greeting"][-len("  unread messages.")]) for x in profiles_data])
+def find_number(string):
+    words = string.split()
+    for word in words:
+        if word.isnumeric():
+            return int(word)
+
+total_unreads = sum([find_number(x["greeting"]) for x in profiles_data])
+
+print(total_unreads)

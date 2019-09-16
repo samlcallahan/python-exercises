@@ -74,5 +74,3 @@ def find_number(string):
             return int(word)
 
 total_unreads = sum([find_number(x["greeting"]) for x in profiles_data])
-
-print(total_unreads)

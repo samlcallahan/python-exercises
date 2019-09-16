@@ -1,0 +1,3 @@
+{"id" : 0, "category" : "deposit", "created" : "2019-09-17", "balance" : 100, "amount" : 100}
+{'id': 1, 'category': 'withdrawal', 'created': '2019-09-16', 'modified': '2019-09-16', 'description': '', 'amount': -20, 'balance': 80}
+{'id': 2, 'category': 'deposit', 'created': '2019-09-16', 'modified': '2019-09-16', 'description': '', 'amount': 20, 'balance': 100}

@@ -15,6 +15,11 @@ def write_checkbook(log_dict):
     else:
         destination.write("\n" + str(log_dict))
 
+def overwrite_checkbook(checkbook):
+    destination = open(checkbook_file,"w")
+    writeable_checkbook = [str(entry) for entry in checkbook]
+    destination.writelines(writeable_checkbook)
+
 def last_id(checkbook_dict):
     return checkbook_dict[-1]["id"]
 
@@ -23,48 +28,67 @@ def balance():
     last_entry = checkbook[-1]
     return last_entry["balance"]
 
-def withdrawal(amount,category="withdrawal",id_number=1):
+def transaction(amount, id_number=1):
+    log_dict = create_entry("transaction", amount, id_number=id_number)
+    write_checkbook(log_dict)
+
+def deposit(amount, id_number=1):
+    transaction(amount, id_number)
+
+def withdraw(amount):
+    transaction(-amount)
+
+def modify(trans_id, new_value):
+    entry_log = create_entry("modify", id_to_mod=trans_id, new_value=new_value)
+    checkbook = recalculate_balances(trans_id, entry_log)
+    entry_log["balance"] = checkbook[-1]["balance"]
+    checkbook = checkbook.append(entry_log)
+    overwrite_checkbook(checkbook)
+
+def create_entry(category, amount=0, id_to_mod=None, new_value=None, id_number=1):
     checkbook = get_checkbook()
+    entry = {}
     if id_number != 0:
         id_number = last_id(checkbook) + 1
     created = time.ctime(time.time())
-    if id_number == 0:
-        new_balance = -amount
+    entry["id"] = id_number
+    entry["category"] = category
+    entry["created"] = created
+    if category == "modify":
+        entry = mod_entry(id_to_mod, new_value, entry)
     else:
-        new_balance = balance() - amount
-    log_dict = {"id" : id_number, "category" : category, "created" : created, "modified" : created, "description" : "", "amount" : -amount, "balance" : new_balance}
-    write_checkbook(log_dict)
+        entry = trans_entry(amount, entry)
+    return entry
 
-def deposit(amount,category="deposit",id_number=1):
-    withdrawal(-amount,category,id_number)
+def trans_entry(amount, entry_stub):
+    entry_stub["modified"] = entry_stub["created"]
+    entry_stub["amount"] = amount
+    entry_stub["mods"] = []
+    if entry_stub["id"] != 0:
+        entry_stub["balance"] = balance() + amount
+    else:
+        entry_stub["balance"] = amount
+    return entry_stub
 
-def modify(trans_id, column, new_value):
+def mod_entry(id_to_mod, new_value, entry_stub):
     checkbook = get_checkbook()
-    if checkbook[column] == new_value or checkbook["category"] == "modify":
-        return
-    modified = time.ctime(time.time())
-    id_number = last_id(checkbook) + 1
-    category = "modify"
-    old_value = checkbook[column]
-    new_balance = checkbook[id_number - 1]["balance"]
-    if column == "category":
-        amount = -checkbook[id_number]["amount"]
-        new_balance = recalculate_balance(id_number,amount)
-    elif column == "amount":
-        new_balance = recalculate_balance(id_number,new_value)
-    log_dict = {"id" : id_number, "category" : category, "created" : modified, "description" : "", "entry" : trans_id, "column" : column, "old" : old_value, "new": new_value, "balance" : new_balance}
-    write_checkbook(log_dict)
-    
-def recalculate_balance(id_number,new_amount):
-    checkbook = get_checkbook()
-    checkbook[id_number]["amount"] = new_amount
-    checkbook[id_number]["balance"] = checkbook[id_number-1]["balance"] + new_amount
-    for id_no in range(id_number + 1,last_id(checkbook) + 1):
-        if 
-        checkbook[id_no]["balance"] = checkbook[id_no - 1]["balance"] +
-    return new_balance
-# def search(key, category ="All",limit=10,offset=0):
+    entry_stub["entry"] = id_to_mod
+    entry_stub["old"] = checkbook[id_to_mod]["amount"]
+    entry_stub["new"] = new_value
+    return entry_stub
 
+def recalculate_balances(id_number, mod_entry_stub):
+    checkbook = get_checkbook()
+    old = mod_entry_stub["old"]
+    new = mod_entry_stub["new"] * -(old < 0)
+    mod_id = mod_entry_stub["id"]
+    checkbook[id_number]["amount"] = new
+    checkbook[id_number]["modified"] = mod_entry_stub["created"]
+    checkbook[id_number]["mods"].append(mod_id)
+    difference = new - old
+    for i in range(id_number, last_id(checkbook) + 1):
+        checkbook[i]["balance"] += difference
+    return checkbook
 
 def exit():
     sys.exit("Thanks for using the terminal checkbook!")

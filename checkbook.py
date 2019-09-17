@@ -37,7 +37,7 @@ def menu_option(choice):
         return
     elif choice == "2":
         amount = float(input("How much would you like to withdraw?\n"))
-        mf.withdrawal(amount)
+        mf.withdraw(amount)
         return
     elif choice == "3":
         amount = float(input("How much would you like to deposit?\n"))
@@ -47,9 +47,8 @@ def menu_option(choice):
         mf.exit()
 
 def modify_prompt():
+    return
 
-def description_prompt():
-    
 checkbook_init()
 
 option = menu_prompt()

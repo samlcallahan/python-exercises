@@ -46,6 +46,10 @@ def menu_option(choice):
     elif choice == "4":
         mf.exit()
 
+def modify_prompt():
+
+def description_prompt():
+    
 checkbook_init()
 
 option = menu_prompt()

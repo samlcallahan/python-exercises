@@ -10,14 +10,11 @@ def get_checkbook():
 
 def write_checkbook(log_dict):
     destination = open(checkbook_file, "a+")
-    if log_dict["id"] == 0:
-        destination.write(str(log_dict))
-    else:
-        destination.write("\n" + str(log_dict))
+    destination.write(str(log_dict) + "\n")
 
 def overwrite_checkbook(checkbook):
     destination = open(checkbook_file,"w")
-    writeable_checkbook = [str(entry) for entry in checkbook]
+    writeable_checkbook = [str(entry) + "\n" for entry in checkbook]
     destination.writelines(writeable_checkbook)
 
 def last_id(checkbook_dict):
@@ -40,12 +37,12 @@ def withdraw(amount):
 
 def modify(trans_id, new_value):
     entry_log = create_entry("modify", id_to_mod=trans_id, new_value=new_value)
-    checkbook = recalculate_balances(trans_id, entry_log)
+    checkbook = recalculate_balances(entry_log)
     entry_log["balance"] = checkbook[-1]["balance"]
-    checkbook = checkbook.append(entry_log)
+    checkbook.append(entry_log)
     overwrite_checkbook(checkbook)
 
-def create_entry(category, amount=0, id_to_mod=None, new_value=None, id_number=1):
+def create_entry(category, amount=0, id_to_mod=None, new_value=None, id_number=None):
     checkbook = get_checkbook()
     entry = {}
     if id_number != 0:
@@ -77,14 +74,15 @@ def mod_entry(id_to_mod, new_value, entry_stub):
     entry_stub["new"] = new_value
     return entry_stub
 
-def recalculate_balances(id_number, mod_entry_stub):
+def recalculate_balances(mod_entry_stub):
     checkbook = get_checkbook()
     old = mod_entry_stub["old"]
-    new = mod_entry_stub["new"] * -(old < 0)
+    new = mod_entry_stub["new"] * (-1 if old < 0 else 1)
     mod_id = mod_entry_stub["id"]
+    id_number = mod_entry_stub["entry"]
     checkbook[id_number]["amount"] = new
     checkbook[id_number]["modified"] = mod_entry_stub["created"]
-    checkbook[id_number]["mods"].append(mod_id)
+    checkbook[id_number]["mods"].append(str(mod_id))
     difference = new - old
     for i in range(id_number, last_id(checkbook) + 1):
         checkbook[i]["balance"] += difference

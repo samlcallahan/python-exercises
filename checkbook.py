@@ -107,8 +107,10 @@ def curr_code_input():
     for code in currency_codes:
         print(code)
     curr_code = input("Which currency?")
+    curr_code = curr_code.upper()
+    print(curr_code)
     while curr_code not in currency_codes:
-        curr_code_input()
+        curr_code = curr_code_input()
     return curr_code
 
 def show_history(only_transactions=True, limit=20, offset=0):

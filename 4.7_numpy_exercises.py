@@ -7,6 +7,8 @@ negative_count = len(a[a < 0])
 positive_count = len(a[a > 0])
 
 positive_and_even = ((a > 0) & (a % 2 ==0)).sum()
+#alternate:
+positive_and_even = a[(a>0) & (a % 2 ==0)].size
 
 b = a + 3
 positive_plus_three = len(b[b > 0])

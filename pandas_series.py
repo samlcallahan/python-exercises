@@ -4,7 +4,7 @@ fruits = pd.Series(["kiwi", "mango", "strawberry", "pineapple", "gala apple", "h
 
 fruits.describe()
 
-fruits.unique
+fruits.unique()
 
 fruits.value_counts()
 

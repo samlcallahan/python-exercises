@@ -8,9 +8,9 @@ fruits.unique()
 
 fruits.value_counts()
 
-fruits.mode()
+most_frequent = fruits.mode()
 
-fruits.value_counts().tail(1)
+least_frequent = fruits.unique()[fruits.value_counts() == 1]
 
 fruits[fruits.apply(len).idxmax()]
 

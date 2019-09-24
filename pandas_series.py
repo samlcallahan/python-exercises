@@ -18,7 +18,7 @@ fruits[fruits.apply(len) > 5]
 
 fruits.str.capitalize()
 
-fruits.str.count("a")
+list(zip(fruits.unique(),pd.Series(fruits.unique()).str.count("a")))
 
 def count_vowels(word):
     vowels = "aeiou"

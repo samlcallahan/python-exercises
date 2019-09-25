@@ -29,6 +29,8 @@ def count_vowels(word):
 
 fruits.apply(count_vowels)
 
+list(zip(fruits.unique(),pd.Series(fruits.unique()).apply(count_vowels)))
+
 fruits[fruits.apply(lambda x: x.count("o") >= 2)]
 
 fruits[fruits.apply(lambda x: "berry" in x)]

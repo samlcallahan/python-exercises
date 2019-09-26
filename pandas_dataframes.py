@@ -75,9 +75,9 @@ mammals.describe()
 fastest_id = mammals["speed"].idxmax()
 mammals["weight"][fastest_id]
 
-mammals["specials]"].sum()/mammals.size
+mammals["specials"].mean() * 100
 
 median_speed = mammals["speed"].median()
 faster_than_median = mammals["speed"] > median_speed
 hoppers_faster_than_median = mammals[faster_than_median]["hoppers"].sum()
-hoppers_faster_than_median / mammals.size
+100 * (hoppers_faster_than_median / mammals.size)

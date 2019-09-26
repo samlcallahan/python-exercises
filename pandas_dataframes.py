@@ -50,8 +50,8 @@ max_diff = mpg["mileage_difference"].max()
 mpg[mpg["mileage_difference"] == max_diff]
 
 compacts = mpg["class"] == "compact"
-id_min = mpg[compacts]["highway"].min()
-id_max = mpg[compacts]["highway"].max()
+id_min = mpg[compacts]["highway"].idxmin()
+id_max = mpg[compacts]["highway"].idxmax()
 mpg["manufacturer"][id_min] + " " + mpg["model"][id_min]
 mpg["manufacturer"][id_max] + " " + mpg["model"][id_max]
 

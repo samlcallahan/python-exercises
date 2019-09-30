@@ -9,7 +9,7 @@ def follows_rule(word):
     actual_sum = 0
     for letter in word[1:]:
         actual_sum += letters.find(letter.lower()) + 1
-    return ought_sum == actual_sum
+    return (ought_sum == actual_sum) and len(word) == 5
 
 results = []
 for i in words:

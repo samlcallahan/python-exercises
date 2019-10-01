@@ -30,7 +30,7 @@ swiss['is_catholic'] = swiss['Catholic'] > 80
 sns.catplot(x='is_catholic', y='Fertility', data=swiss) # Catholicism correlates with higher fertility
 
 swiss.drop('is_catholic', axis=1)
-sns.heatmap(swiss.corr(), cmap='vlag') # Catholicism
+sns.heatmap(swiss.corr(), cmap='vlag') # Education
 
 def get_db_url(username, hostname, password, db_name):
     return f'mysql+pymysql://{username}:{password}@{hostname}/{db_name}'

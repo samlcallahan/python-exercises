@@ -48,10 +48,10 @@ to_bar['revenue'] = top_revenues.values
 sns.barplot(x='item', y='revenue', data=to_bar)
 
 sleep = data('sleepstudy')
+sleep['Subject'] = 'subject_' + sleep['Subject'].astype(str)
 sns.set_style('dark')
 sns.set_context(font_scale=.5,rc={"grid.linewidth": .5, "axes.linewidth": .5, "ytick.major.width": .5, "xtick.major.width": .5,"lines.linewidth": 0.5})
-palette = sns.color_palette('PuOr', 18)
-sns.lineplot(x='Days', y='Reaction', hue='Subject', data=sleep, palette=palette)
+sns.lineplot(x='Days', y='Reaction', hue='Subject', data=sleep)
 sns.set_context(rc={"lines.linewidth": 4})
 sns.lineplot(x='Days', y='Reaction', data=sleep, ci=None)
 sns.despine()
